@@ -58,6 +58,9 @@ def categorize_url(url, title, meta_description, h1, rules_df, city_names):
         any(city in url for city in city_names) and
         not any(re.search(rule['Keyword'].lower().strip(), url) for _, rule in applicable_rules.iterrows())
     ):
+        # Check for MLS keywords in title or meta description
+        if any(keyword in title or keyword in meta_description for keyword in ["sell", "buy", "sale"]):
+            return "MLS Pages"
         return "Neighborhood Pages"
 
     # 3. Fallback to CMS Pages if uncategorized
