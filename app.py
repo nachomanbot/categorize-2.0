@@ -69,7 +69,12 @@ def main():
 
     # File uploader
     if uploaded_file is not None:
-        df = pd.read_csv(uploaded_file)
+        try:
+            df = pd.read_csv(uploaded_file, encoding="ISO-8859-1", errors='replace')
+        except UnicodeDecodeError:
+            st.error("Error reading CSV file. Please ensure it is saved in UTF-8 or ISO-8859-1 encoding.")
+            return
+        
         required_columns = ["Address", "Title 1", "Meta Description 1", "H1-1"]
         if not all(column in df.columns for column in required_columns):
             st.error("The uploaded file must have the following columns: 'Address', 'Title 1', 'Meta Description 1', 'H1-1'.")
