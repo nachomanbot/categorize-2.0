@@ -70,10 +70,17 @@ def main():
     # File uploader
     if uploaded_file is not None:
         try:
-            df = pd.read_csv(uploaded_file, encoding="ISO-8859-1", errors='replace')
-        except UnicodeDecodeError:
-            st.error("Error reading CSV file. Please ensure it is saved in UTF-8 or ISO-8859-1 encoding.")
-            return
+            # Attempt to read the CSV file with various encodings to be flexible
+            encodings = ["utf-8", "ISO-8859-1", "utf-16", "cp1252"]
+            for encoding in encodings:
+                try:
+                    df = pd.read_csv(uploaded_file, encoding=encoding, errors='replace')
+                    break
+                except UnicodeDecodeError:
+                    continue
+            else:
+                st.error("Error reading CSV file. Please ensure it is saved in a compatible encoding (e.g., UTF-8, ISO-8859-1).")
+                return
         
         required_columns = ["Address", "Title 1", "Meta Description 1", "H1-1"]
         if not all(column in df.columns for column in required_columns):
