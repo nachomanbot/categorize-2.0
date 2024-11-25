@@ -28,14 +28,25 @@ else:
     st.stop()
 
 # Define the categorization function using dynamic rules
-def categorize_url(url, rules_df, city_names):
+def categorize_url(url, title, meta_description, h1, rules_df, city_names):
     url = url.lower()
+    title = title.lower() if pd.notna(title) else ""
+    meta_description = meta_description.lower() if pd.notna(meta_description) else ""
+    h1 = h1.lower() if pd.notna(h1) else ""
 
     # Apply CSV rules (sorted by priority if applicable)
     applicable_rules = rules_df.sort_values(by='Priority') if 'Priority' in rules_df.columns else rules_df
     for _, rule in applicable_rules.iterrows():
         keyword_normalized = rule['Keyword'].lower().strip()
-        if re.search(keyword_normalized, url):
+        location = rule['Location'].lower().strip()
+        
+        if location == 'url' and re.search(keyword_normalized, url):
+            return rule['Category']
+        elif location == 'title' and re.search(keyword_normalized, title):
+            return rule['Category']
+        elif location == 'meta description' and re.search(keyword_normalized, meta_description):
+            return rule['Category']
+        elif location == 'h1' and re.search(keyword_normalized, h1):
             return rule['Category']
 
     # 1. Neighborhood Pages (Detect City Names)
@@ -50,17 +61,18 @@ def categorize_url(url, rules_df, city_names):
 
 # Main function to process the uploaded file
 def main():
-    st.write("Upload a CSV file with a column named 'URL' for categorization.")
+    st.write("Upload a CSV file with the following columns: 'Address', 'Title 1', 'Meta Description 1', 'H1-1' for categorization.")
 
     # File uploader
     if uploaded_file is not None:
         df = pd.read_csv(uploaded_file)
-        if "URL" not in df.columns:
-            st.error("The uploaded file must have a column named 'URL'.")
+        required_columns = ["Address", "Title 1", "Meta Description 1", "H1-1"]
+        if not all(column in df.columns for column in required_columns):
+            st.error("The uploaded file must have the following columns: 'Address', 'Title 1', 'Meta Description 1', 'H1-1'.")
             return
 
         # Categorize URLs
-        df["Category"] = df["URL"].apply(lambda url: categorize_url(url, rules_df, city_names))
+        df["Category"] = df.apply(lambda row: categorize_url(row["Address"], row["Title 1"], row["Meta Description 1"], row["H1-1"], rules_df, city_names), axis=1)
 
         # Show results and allow download
         st.write("Categorized URLs:", df)
