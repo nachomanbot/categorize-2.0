@@ -74,11 +74,14 @@ def main():
         # Categorize URLs
         df["Category"] = df.apply(lambda row: categorize_url(row["Address"], row["Title 1"], row["Meta Description 1"], row["H1-1"], rules_df, city_names), axis=1)
 
+        # Create output DataFrame with only Address and Category columns
+        output_df = df[["Address", "Category"]]
+
         # Show results and allow download
-        st.write("Categorized URLs:", df)
+        st.write("Categorized URLs:", output_df)
         st.download_button(
             label="Download Categorized CSV",
-            data=df.to_csv(index=False),
+            data=output_df.to_csv(index=False),
             file_name="categorized_urls.csv",
             mime="text/csv"
         )
