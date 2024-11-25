@@ -72,13 +72,16 @@ def main():
         try:
             # Attempt to read the CSV file with various encodings to be flexible
             encodings = ["utf-8", "ISO-8859-1", "utf-16", "cp1252"]
+            df = None
             for encoding in encodings:
                 try:
                     df = pd.read_csv(uploaded_file, encoding=encoding, errors='replace')
                     break
                 except UnicodeDecodeError:
                     continue
-            else:
+            if df is None:
+                st.error("Error reading CSV file. Please ensure it is saved in a compatible encoding (e.g., UTF-8, ISO-8859-1).")
+                return
                 st.error("Error reading CSV file. Please ensure it is saved in a compatible encoding (e.g., UTF-8, ISO-8859-1).")
                 return
         
