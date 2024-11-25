@@ -56,7 +56,11 @@ def categorize_url(url, title, meta_description, h1, rules_df, city_names):
     ):
         return "Neighborhood Pages"
 
-    # 2. Fallback to CMS Pages if uncategorized
+    # 2. Homepage Detection (Relative and Absolute URLs)
+    if url in ["/", "", "index.html"] or re.fullmatch(r"https?://[^/]+/?", url):
+        return "CMS Pages"
+
+    # 3. Fallback to CMS Pages if uncategorized
     return "CMS Pages"
 
 # Main function to process the uploaded file
