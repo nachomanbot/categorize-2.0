@@ -1,0 +1,14 @@
+Keyword,Category,Location,Priority
+/blog,Blog Pages,URL,1
+/tag|/category,Blog Filters,URL,2
+/properties|/property|/homes-for-sale|/rent|/listings|/rentals,Property Pages,URL,3
+/page/\d+,Pagination,URL,4
+/agent|/team,Agent Pages,URL,5
+/contact|/about|/testimonials|/privacy|/tos|/terms|/resources|/sell|/purchase|/films,CMS Pages,URL,6
+homepage|index,Homepage,Title,1
+for sale|luxury homes,Property Pages,Title,2
+agent|real estate team,Agent Pages,Title,3
+rent|leasing,Property Pages,Meta Description,1
+sell your home|home valuation,CMS Pages,Meta Description,2
+testimonials|customer stories,Testimonials Page,H1,1
+neighborhood guide|area information,Neighborhood Pages,H1,2
