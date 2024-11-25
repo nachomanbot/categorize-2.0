@@ -82,10 +82,8 @@ def main():
             if df is None:
                 st.error("Error reading CSV file. Please ensure it is saved in a compatible encoding (e.g., UTF-8, ISO-8859-1).")
                 return
-                st.error("Error reading CSV file. Please ensure it is saved in a compatible encoding (e.g., UTF-8, ISO-8859-1).")
-                return
         
-        required_columns = ["Address", "Title 1", "Meta Description 1", "H1-1"]
+                required_columns = ["Address", "Title 1", "Meta Description 1", "H1-1"]
         if not all(column in df.columns for column in required_columns):
             st.error("The uploaded file must have the following columns: 'Address', 'Title 1', 'Meta Description 1', 'H1-1'.")
             return
