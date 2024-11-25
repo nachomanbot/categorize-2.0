@@ -54,10 +54,7 @@ def categorize_url(url, title, meta_description, h1, rules_df, city_names):
             return rule['Category']
 
     # 2. Neighborhood Pages (Detect City Names)
-    if (
-        any(city in url for city in city_names) and
-        not any(re.search(rule['Keyword'].lower().strip(), url) for _, rule in applicable_rules.iterrows())
-    ):
+    if any(city in url for city in city_names):
         # Check for MLS keywords in title or meta description
         if any(keyword in title or keyword in meta_description for keyword in ["sell", "buy", "sale"]):
             return "MLS Pages"
