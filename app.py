@@ -60,7 +60,11 @@ def categorize_url(url, title, meta_description, h1, rules_df, city_names):
             return "MLS Pages"
         return "Neighborhood Pages"
 
-    # 3. Fallback to CMS Pages if uncategorized
+    # 3. Parameter Pages
+    if re.search(r'\?.+?=.*', url):
+        return "Parameter Pages"
+
+    # 4. Fallback to CMS Pages if uncategorized
     return "CMS Pages"
 
 # Main function to process the uploaded file
