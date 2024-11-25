@@ -29,10 +29,14 @@ else:
 
 # Define the categorization function using dynamic rules
 def categorize_url(url, title, meta_description, h1, rules_df, city_names):
-    url = url.lower()
+    url = url.lower().strip()
     title = title.lower() if pd.notna(title) else ""
     meta_description = meta_description.lower() if pd.notna(meta_description) else ""
     h1 = h1.lower() if pd.notna(h1) else ""
+
+    # 1. Homepage Detection (Relative and Absolute URLs)
+    if re.fullmatch(r"https?://(www\.)?[^/]+(/)?(index\.html)?", url) or url in ["/", "", "index.html"]:
+        return "CMS Pages"
 
     # Apply CSV rules (sorted by priority if applicable)
     applicable_rules = rules_df.sort_values(by='Priority') if 'Priority' in rules_df.columns else rules_df
@@ -49,16 +53,12 @@ def categorize_url(url, title, meta_description, h1, rules_df, city_names):
         elif location == 'h1' and re.search(keyword_normalized, h1):
             return rule['Category']
 
-    # 1. Neighborhood Pages (Detect City Names)
+    # 2. Neighborhood Pages (Detect City Names)
     if (
         any(city in url for city in city_names) and
         not any(re.search(rule['Keyword'].lower().strip(), url) for _, rule in applicable_rules.iterrows())
     ):
         return "Neighborhood Pages"
-
-    # 2. Homepage Detection (Relative and Absolute URLs)
-    if url in ["/", "", "index.html"] or re.fullmatch(r"https?://(www\.)?[^/]+(/)?(index.html)?", url):
-        return "CMS Pages"
 
     # 3. Fallback to CMS Pages if uncategorized
     return "CMS Pages"
