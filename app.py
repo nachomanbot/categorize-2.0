@@ -57,7 +57,7 @@ def categorize_url(url, title, meta_description, h1, rules_df, city_names):
         return "Neighborhood Pages"
 
     # 2. Homepage Detection (Relative and Absolute URLs)
-    if url in ["/", "", "index.html"] or re.fullmatch(r"https?://(www\.)?[^/]+/?", url):
+    if url in ["/", "", "index.html"] or re.fullmatch(r"https?://(www\.)?[^/]+(/)?(index.html)?", url):
         return "CMS Pages"
 
     # 3. Fallback to CMS Pages if uncategorized
