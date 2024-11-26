@@ -18,11 +18,14 @@ reference_path = 'reference_urls.csv'  # Path to the reference CSV on the backen
 if os.path.exists(reference_path):
     reference_df = pd.read_csv(reference_path, encoding="ISO-8859-1")
     required_reference_columns = ["Address", "Title", "Meta Description"]
-    # Remove missing columns from required columns check
+    # Handle missing columns gracefully
     existing_columns = [col for col in required_reference_columns if col in reference_df.columns]
-    reference_df['combined_text'] = reference_df[existing_columns].fillna('').apply(lambda x: ' '.join(x.astype(str)), axis=1)
-    reference_df['combined_text'] = reference_df[['Address', 'Title', 'Meta Description']].fillna('').apply(lambda x: ' '.join(x.astype(str)), axis=1)
-else:
+    if existing_columns:
+        reference_df['combined_text'] = reference_df[existing_columns].fillna('').apply(lambda x: ' '.join(x.astype(str)), axis=1)
+    else:
+        st.error("The reference file must contain at least one of the following columns: 'Address', 'Title', 'Meta Description'.")
+        st.stop()
+    else:
     st.error("Reference file not found on the backend.")
     st.stop()
 
