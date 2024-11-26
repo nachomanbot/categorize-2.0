@@ -25,8 +25,7 @@ if os.path.exists(reference_path):
     else:
         st.error("The reference file must contain at least one of the following columns: 'Address', 'Title', 'Meta Description'.")
         st.stop()
-    st.error("Reference file not found on the backend.")
-    st.stop()
+    
 
 # Load us_cities.csv from the backend
 us_cities_path = 'us_cities.csv'  # Path to the US cities CSV on the backend
