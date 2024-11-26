@@ -2,6 +2,7 @@ import pandas as pd
 import re
 import streamlit as st
 import os
+import csv
 
 # Set the title of the Streamlit app
 st.title("Dynamic URL Categorizer with Similarity Matching")
@@ -33,7 +34,19 @@ else:
     st.error("US cities file not found on the backend.")
     st.stop()
 
-# Define the categorization function without similarity matching
+# Define the categorization function using rules from rules.csv
+
+def load_rules():
+    rules_path = 'rules.csv'
+    if os.path.exists(rules_path):
+        with open(rules_path, mode='r', encoding='ISO-8859-1') as file:
+            reader = csv.DictReader(file)
+            return list(reader)
+    else:
+        st.error("Rules file not found on the backend.")
+        st.stop()
+
+rules = load_rules()
 
 def categorize_url(url, title, meta_description, h1):
     url = url.lower().strip()
@@ -41,18 +54,23 @@ def categorize_url(url, title, meta_description, h1):
     meta_description = meta_description.lower() if pd.notna(meta_description) else ""
     h1 = h1.lower() if pd.notna(h1) else ""
 
-    # 1. Homepage Detection (Relative and Absolute URLs)
-    if re.fullmatch(r"https?://(www\.)?[^/]+(/)?(index\.html)?", url) or url in ["/", "", "index.html"]:
-        return "CMS Pages"
+    # Apply rules from rules.csv
+    for rule in rules:
+        keyword = rule['Keyword'].lower()
+        category = rule['Category']
+        location = rule['Location'].lower()
+        priority = int(rule['Priority'])
 
-    # 2. Neighborhood Pages (Detect City Names)
-    if any(city in url for city in city_names):
-        # Check for MLS keywords in title or meta description
-        if any(keyword in title or keyword in meta_description for keyword in ["sell", "buy", "sale"]):
-            return "MLS Pages"
-        return "Neighborhood Pages"
+        if location == 'url' and re.search(keyword, url):
+            return category
+        elif location == 'title' and keyword in title:
+            return category
+        elif location == 'meta description' and keyword in meta_description:
+            return category
+        elif location == 'h1' and keyword in h1:
+            return category
 
-    # 3. Default Category
+    # Default Category if no rules matched
     return "CMS Pages"
 
 # Main function to process the uploaded file
