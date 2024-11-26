@@ -1,8 +1,8 @@
 Keyword,Category,Location,Priority
 \?.+=,Parameters,URL,1
+/page/\d+,Pagination,URL,1
 /blog,Blog Pages,URL,1
 /tag|/category,Blog Filters,URL,1
-/page/\d+,Pagination,URL,1
 /properties|/property|/homes-for-sale|/rent|/listings|/rentals,Property Pages,URL,3
 /agent|/team|/our-team,Agent Pages,URL,1
 service,CMS Pages,Title,1
