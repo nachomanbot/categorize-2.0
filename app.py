@@ -79,16 +79,17 @@ def main():
                 st.error("Error reading CSV file. Please ensure it is saved in a compatible encoding (e.g., UTF-8, ISO-8859-1).")
                 return
 
-            required_columns = ["Address", "Title 1", "Meta Description 1", "H1-1"]
-            if not all(column in df.columns for column in required_columns):
-                st.error("The uploaded file must have the following columns: 'URL', 'Title 1', 'Meta Description 1', 'H1-1'.")
+            # Automatically detect the columns by assuming their order
+            if len(df.columns) < 4:
+                st.error("The uploaded file must have at least 4 columns: Address/URL, Title, Meta Description, H1.")
                 return
+            df.columns = ['Address', 'Title 1', 'Meta Description 1', 'H1-1']
 
             us_cities = load_us_cities()
             rules = load_rules()
 
             # Categorize URLs
-            df["Category"] = df.apply(lambda row: categorize_url(row["Address"], row["Title 1"], row["Meta Description 1"], row["H1-1"], us_cities, rules), axis=1)
+            df["Category"] = df.apply(lambda row: categorize_url(row['Address'], row['Title 1'], row['Meta Description 1'], row['H1-1'], us_cities, rules), axis=1)
 
             # Create output DataFrame with only Address and Category columns
             output_df = df[["Address", "Category"]]
