@@ -2,24 +2,28 @@ import pandas as pd
 import re
 import streamlit as st
 import os
+from sentence_transformers import SentenceTransformer
+import faiss
+import numpy as np
 
 # Set the title of the Streamlit app
-st.title("Dynamic URL Categorizer")
+st.title("Dynamic URL Categorizer with Similarity Matching")
 
 # Step 1: Upload Files
 st.header("Upload Your Files")
-uploaded_file = st.file_uploader("Upload URLs CSV", type="csv")
+uploaded_file = st.file_uploader("Upload URLs CSV for Categorization", type="csv")
 
-# Load rules.csv from the backend
-rules_path = 'rules.csv'  # Path to the rules CSV on the backend
-us_cities_path = 'us_cities.csv'  # Path to the US cities CSV on the backend
-
-if os.path.exists(rules_path):
-    rules_df = pd.read_csv(rules_path, encoding="ISO-8859-1")
+# Load reference CSV with pre-categorized entries
+reference_path = 'reference_urls.csv'  # Path to the reference CSV on the backend
+if os.path.exists(reference_path):
+    reference_df = pd.read_csv(reference_path, encoding="ISO-8859-1")
+    reference_df['combined_text'] = reference_df[['Address', 'Title', 'Meta Description']].fillna('').apply(lambda x: ' '.join(x.astype(str)), axis=1)
 else:
-    st.error("Rules file not found on the backend.")
+    st.error("Reference file not found on the backend.")
     st.stop()
 
+# Load us_cities.csv from the backend
+us_cities_path = 'us_cities.csv'  # Path to the US cities CSV on the backend
 if os.path.exists(us_cities_path):
     us_cities_df = pd.read_csv(us_cities_path, encoding="ISO-8859-1")
     city_names = us_cities_df['CITY'].str.lower().str.strip().tolist()
@@ -27,8 +31,8 @@ else:
     st.error("US cities file not found on the backend.")
     st.stop()
 
-# Define the categorization function using dynamic rules
-def categorize_url(url, title, meta_description, h1, rules_df, city_names):
+# Define the categorization function using similarity matching
+def categorize_url(url, title, meta_description, h1, reference_embeddings, reference_df, model):
     url = url.lower().strip()
     title = title.lower() if pd.notna(title) else ""
     meta_description = meta_description.lower() if pd.notna(meta_description) else ""
@@ -38,21 +42,6 @@ def categorize_url(url, title, meta_description, h1, rules_df, city_names):
     if re.fullmatch(r"https?://(www\.)?[^/]+(/)?(index\.html)?", url) or url in ["/", "", "index.html"]:
         return "CMS Pages"
 
-    # Apply CSV rules (sorted by priority if applicable)
-    applicable_rules = rules_df.sort_values(by='Priority') if 'Priority' in rules_df.columns else rules_df
-    for _, rule in applicable_rules.iterrows():
-        keyword_normalized = rule['Keyword'].lower().strip()
-        location = rule['Location'].lower().strip()
-        
-        if location == 'url' and re.search(keyword_normalized, url):
-            return rule['Category']
-        elif location == 'title' and re.search(keyword_normalized, title):
-            return rule['Category']
-        elif location == 'meta description' and re.search(keyword_normalized, meta_description):
-            return rule['Category']
-        elif location == 'h1' and re.search(keyword_normalized, h1):
-            return rule['Category']
-
     # 2. Neighborhood Pages (Detect City Names)
     if any(city in url for city in city_names):
         # Check for MLS keywords in title or meta description
@@ -60,16 +49,30 @@ def categorize_url(url, title, meta_description, h1, rules_df, city_names):
             return "MLS Pages"
         return "Neighborhood Pages"
 
-    # 3. Parameter Pages
-    if re.search(r'\?.+?=.*', url):
-        return "Parameter Pages"
-
-    # 4. Fallback to CMS Pages if uncategorized
-    return "CMS Pages"
+    # 3. Use Similarity Matching with Reference Dataset
+    combined_text = ' '.join([url, title, meta_description, h1])
+    query_embedding = model.encode([combined_text])
+    
+    # Use faiss to find the closest match in the reference embeddings
+    dimension = reference_embeddings.shape[1]
+    faiss_index = faiss.IndexFlatL2(dimension)
+    faiss_index.add(reference_embeddings)
+    D, I = faiss_index.search(query_embedding.astype('float32'), k=1)
+    
+    # Get the closest category from the reference dataset
+    closest_index = I[0][0]
+    closest_category = reference_df.iloc[closest_index]['Category']
+    return closest_category
 
 # Main function to process the uploaded file
 def main():
     st.write("Upload a CSV file with the following columns: 'Address', 'Title 1', 'Meta Description 1', 'H1-1' for categorization.")
+
+    # Load pre-trained model for embeddings
+    model = SentenceTransformer('all-MiniLM-L6-v2')
+
+    # Create embeddings for the reference dataset
+    reference_embeddings = model.encode(reference_df['combined_text'].tolist(), show_progress_bar=True)
 
     # File uploader
     if uploaded_file is not None:
@@ -92,8 +95,8 @@ def main():
                 st.error("The uploaded file must have the following columns: 'Address', 'Title 1', 'Meta Description 1', 'H1-1'.")
                 return
 
-            # Categorize URLs
-            df["Category"] = df.apply(lambda row: categorize_url(row["Address"], row["Title 1"], row["Meta Description 1"], row["H1-1"], rules_df, city_names), axis=1)
+            # Categorize URLs using similarity matching
+            df["Category"] = df.apply(lambda row: categorize_url(row["Address"], row["Title 1"], row["Meta Description 1"], row["H1-1"], reference_embeddings, reference_df, model), axis=1)
 
             # Create output DataFrame with only Address and Category columns
             output_df = df[["Address", "Category"]]
