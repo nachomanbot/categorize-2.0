@@ -26,7 +26,7 @@ def categorize_url(url, title, meta_description, h1, us_cities, rules):
     url = url.lower().strip()
     title = title.lower() if pd.notna(title) else ""
     meta_description = meta_description.lower() if pd.notna(meta_description) else ""
-    h1 = h1.lower() if pd.notna(h1) else ""
+    h1 = str(h1).lower() if pd.notna(h1) else ""
 
     # Apply rules from rules.csv
     for rule in rules:
