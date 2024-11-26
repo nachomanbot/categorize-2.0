@@ -74,13 +74,16 @@ def main():
     st.write("Upload a CSV file with the following columns: 'Address', 'Title 1', 'Meta Description 1', 'H1-1' for categorization.")
 
     # Load pre-trained model for embeddings
+    st.info("Loading pre-trained model for embeddings...")
     model = SentenceTransformer('all-MiniLM-L6-v2')
 
     # Create embeddings for the reference dataset
+    st.info("Generating embeddings for the reference dataset. This may take a while...")
     reference_embeddings = model.encode(reference_df['combined_text'].tolist(), show_progress_bar=True)
 
     # File uploader
     if uploaded_file is not None:
+        st.info("Processing the uploaded file. Please wait...")
         try:
             # Attempt to read the CSV file with various encodings to be flexible
             encodings = ["utf-8", "ISO-8859-1", "utf-16", "cp1252"]
@@ -101,7 +104,15 @@ def main():
                 return
 
             # Categorize URLs using similarity matching
-            df["Category"] = df.apply(lambda row: categorize_url(row["Address"], row["Title 1"], row["Meta Description 1"], row["H1-1"], reference_embeddings, reference_df, model), axis=1)
+            progress_bar = st.progress(0)
+            total_rows = len(df)
+            
+            def categorize_with_progress(row, idx):
+                category = categorize_url(row["Address"], row["Title 1"], row["Meta Description 1"], row["H1-1"], reference_embeddings, reference_df, model)
+                progress_bar.progress((idx + 1) / total_rows)
+                return category
+            
+            df["Category"] = [categorize_with_progress(row, idx) for idx, row in df.iterrows()]
 
             # Create output DataFrame with only Address and Category columns
             output_df = df[["Address", "Category"]]
