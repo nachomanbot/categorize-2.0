@@ -2,9 +2,6 @@ import pandas as pd
 import re
 import streamlit as st
 import os
-from sentence_transformers import SentenceTransformer
-import faiss
-import numpy as np
 
 # Set the title of the Streamlit app
 st.title("Dynamic URL Categorizer with Similarity Matching")
@@ -36,8 +33,9 @@ else:
     st.error("US cities file not found on the backend.")
     st.stop()
 
-# Define the categorization function using similarity matching
-def categorize_url(url, title, meta_description, h1, reference_embeddings, reference_df, model):
+# Define the categorization function without similarity matching
+
+def categorize_url(url, title, meta_description, h1):
     url = url.lower().strip()
     title = title.lower() if pd.notna(title) else ""
     meta_description = meta_description.lower() if pd.notna(meta_description) else ""
@@ -54,36 +52,15 @@ def categorize_url(url, title, meta_description, h1, reference_embeddings, refer
             return "MLS Pages"
         return "Neighborhood Pages"
 
-    # 3. Use Similarity Matching with Reference Dataset
-    combined_text = ' '.join([url, title, meta_description, h1])
-    query_embedding = model.encode([combined_text])
-    
-    # Use faiss to find the closest match in the reference embeddings
-    dimension = reference_embeddings.shape[1]
-    faiss_index = faiss.IndexFlatL2(dimension)
-    faiss_index.add(reference_embeddings)
-    D, I = faiss_index.search(query_embedding.astype('float32'), k=1)
-    
-    # Get the closest category from the reference dataset
-    closest_index = I[0][0]
-    closest_category = reference_df.iloc[closest_index]['Category']
-    return closest_category
+    # 3. Default Category
+    return "CMS Pages"
 
 # Main function to process the uploaded file
 def main():
     st.write("Upload a CSV file with the following columns: 'Address', 'Title 1', 'Meta Description 1', 'H1-1' for categorization.")
 
-    st.info("Loading pre-trained model for embeddings...")
-    model = SentenceTransformer('all-MiniLM-L6-v2')
-
-    @st.cache_data
-    def generate_reference_embeddings(reference_texts):
-        st.info("Generating embeddings for the reference dataset. This may take a while...")
-        local_model = SentenceTransformer('all-MiniLM-L6-v2')
-        return local_model.encode(reference_texts, show_progress_bar=True)
-
-    reference_embeddings = generate_reference_embeddings(reference_df['combined_text'].tolist())
-
+    
+    
     # File uploader
     if uploaded_file is not None:
         st.info("Processing the uploaded file. Please wait...")
@@ -111,7 +88,7 @@ def main():
             total_rows = len(df)
             
             def categorize_with_progress(row, idx):
-                category = categorize_url(row["Address"], row["Title 1"], row["Meta Description 1"], row["H1-1"], reference_embeddings, reference_df, model)
+                category = categorize_url(row["Address"], row["Title 1"], row["Meta Description 1"], row["H1-1"])
                 progress_bar.progress((idx + 1) / total_rows)
                 return category
             
