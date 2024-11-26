@@ -73,13 +73,19 @@ def categorize_url(url, title, meta_description, h1, reference_embeddings, refer
 def main():
     st.write("Upload a CSV file with the following columns: 'Address', 'Title 1', 'Meta Description 1', 'H1-1' for categorization.")
 
-    # Load pre-trained model for embeddings
-    st.info("Loading pre-trained model for embeddings...")
-    model = SentenceTransformer('all-MiniLM-L6-v2')
+    @st.cache_resource
+    def load_model():
+        st.info("Loading pre-trained model for embeddings...")
+        return SentenceTransformer('all-MiniLM-L6-v2')
 
-    # Create embeddings for the reference dataset
-    st.info("Generating embeddings for the reference dataset. This may take a while...")
-    reference_embeddings = model.encode(reference_df['combined_text'].tolist(), show_progress_bar=True)
+    model = load_model()
+
+    @st.cache_data
+    def generate_reference_embeddings(reference_df, model):
+        st.info("Generating embeddings for the reference dataset. This may take a while...")
+        return model.encode(reference_df['combined_text'].tolist(), show_progress_bar=True)
+
+    reference_embeddings = generate_reference_embeddings(reference_df, model)
 
     # File uploader
     if uploaded_file is not None:
