@@ -17,6 +17,10 @@ uploaded_file = st.file_uploader("Upload URLs CSV for Categorization", type="csv
 reference_path = 'reference_urls.csv'  # Path to the reference CSV on the backend
 if os.path.exists(reference_path):
     reference_df = pd.read_csv(reference_path, encoding="ISO-8859-1")
+    required_reference_columns = ["Address", "Title", "Meta Description"]
+    # Remove missing columns from required columns check
+    existing_columns = [col for col in required_reference_columns if col in reference_df.columns]
+    reference_df['combined_text'] = reference_df[existing_columns].fillna('').apply(lambda x: ' '.join(x.astype(str)), axis=1)
     reference_df['combined_text'] = reference_df[['Address', 'Title', 'Meta Description']].fillna('').apply(lambda x: ' '.join(x.astype(str)), axis=1)
 else:
     st.error("Reference file not found on the backend.")
