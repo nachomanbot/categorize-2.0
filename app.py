@@ -79,7 +79,8 @@ def main():
     @st.cache_data
     def generate_reference_embeddings(reference_texts):
         st.info("Generating embeddings for the reference dataset. This may take a while...")
-        return model.encode(reference_texts, show_progress_bar=True)
+        local_model = SentenceTransformer('all-MiniLM-L6-v2')
+        return local_model.encode(reference_texts, show_progress_bar=True)
 
     reference_embeddings = generate_reference_embeddings(reference_df['combined_text'].tolist())
 
