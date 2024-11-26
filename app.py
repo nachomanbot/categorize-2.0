@@ -25,7 +25,6 @@ if os.path.exists(reference_path):
     else:
         st.error("The reference file must contain at least one of the following columns: 'Address', 'Title', 'Meta Description'.")
         st.stop()
-    else:
     st.error("Reference file not found on the backend.")
     st.stop()
 
