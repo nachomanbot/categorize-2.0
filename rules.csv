@@ -5,6 +5,7 @@ Keyword,Category,Location,Priority
 /properties|/property|/homes-for-sale|/rent|/listings|/rentals,Property Pages,URL,3
 /page/\d+,Pagination,URL,1
 /agent|/team|/our-team,Agent Pages,URL,1
+service,CMS Pages,Title,1
 /contact|/about|/testimonials|/privacy|/tos|/terms|/resources|/sell|/purchase|/films|/career|/services,CMS Pages,URL,6
 homepage|index,Homepage,Title,1
 for sale|luxury homes,Property Pages,Title,2
