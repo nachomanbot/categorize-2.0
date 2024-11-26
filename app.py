@@ -91,8 +91,8 @@ def main():
             # Categorize URLs
             df["Category"] = df.apply(lambda row: categorize_url(row['Address'], row['Title 1'], row['Meta Description 1'], row['H1-1'], us_cities, rules), axis=1)
 
-            # Create output DataFrame with only Address and Category columns
-            output_df = df[["Address", "Category"]]
+            # Create output DataFrame with Address, Category, Meta Title, and Meta Description columns
+            output_df = df[["Address", "Category", "Title 1", "Meta Description 1"]]
 
             # Show results and allow download
             st.write("Categorized URLs:", output_df)
