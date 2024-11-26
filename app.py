@@ -5,7 +5,6 @@ import os
 import csv
 
 # Load US cities as a static resource
-@st.cache_data
 def load_us_cities():
     us_cities_path = "us_cities.csv"
     us_cities = pd.read_csv(us_cities_path)['CITY'].str.lower().tolist()
