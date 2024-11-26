@@ -14,7 +14,7 @@ st.header("Upload Your Files")
 uploaded_file = st.file_uploader("Upload URLs CSV for Categorization", type="csv")
 
 # Load reference CSV with pre-categorized entries
-reference_path = 'reference_urls.csv'  # Path to the reference CSV on the backend
+reference_path = os.path.join(os.path.dirname(__file__), 'reference_urls.csv')  # Path to the reference CSV on the backend
 if os.path.exists(reference_path):
     reference_df = pd.read_csv(reference_path, encoding="ISO-8859-1")
     required_reference_columns = ["Address", "Title", "Meta Description"]
