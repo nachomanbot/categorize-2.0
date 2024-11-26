@@ -2,14 +2,14 @@ Keyword,Category,Location,Priority
 \?.+=,Parameters,URL,1
 /blog,Blog Pages,URL,1
 /tag|/category,Blog Filters,URL,1
-/uncategorized,Blog Pages,URL,2
-/properties|/property|/homes-for-sale|/rent|/listings|/rentals,Property Pages,URL,3
 /page/\d+,Pagination,URL,1
+/properties|/property|/homes-for-sale|/rent|/listings|/rentals,Property Pages,URL,3
 /agent|/team|/our-team,Agent Pages,URL,1
 service,CMS Pages,Title,1
 /contact|/about|/testimonials|/privacy|/tos|/terms|/resources|/sell|/purchase|/films|/career|/services,CMS Pages,URL,6
 homepage|index,Homepage,Title,1
 for sale|luxury homes,Property Pages,Title,2
+/uncategorized,Blog Pages,URL,2
 agent|real estate team,Agent Pages,Title,3
 rent|leasing,Property Pages,Meta Description,1
 sell your home|home valuation,CMS Pages,Meta Description,2
