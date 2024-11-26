@@ -1,4 +1,5 @@
 Keyword,Category,Location,Priority
+\?.+=,Parameters,URL,1
 /blog,Blog Pages,URL,1
 /tag|/category,Blog Filters,URL,1
 /uncategorized,Blog Pages,URL,2
@@ -15,4 +16,3 @@ sell your home|home valuation,CMS Pages,Meta Description,2
 testimonials|customer stories,Testimonials Page,H1,1
 neighborhood guide|area information|communities,Neighborhood Pages,H1,2
 /real-estate,MLS Pages,URL,1
-\?.+=,Parameters,URL,1
