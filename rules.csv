@@ -1,5 +1,5 @@
 Keyword,Category,Location,Priority
-/blog | /uncategorized,Blog Pages,URL,1
+/blog|/uncategorized,Blog Pages,URL,1
 /tag|/category,Blog Filters,URL,2
 /properties|/property|/homes-for-sale|/rent|/listings|/rentals,Property Pages,URL,3
 /page/\d+,Pagination,URL,1
