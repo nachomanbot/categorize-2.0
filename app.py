@@ -60,7 +60,7 @@ def categorize_url(url, title, meta_description, h1, us_cities, rules):
 # Main function
 def main():
     st.title("URL Categorizer")
-    st.write("Upload a CSV file with the following columns: 'URL', 'Title 1', 'Meta Description 1', 'H1-1' for categorization.")
+    st.write("Upload a CSV file with the following columns: 'Address', 'Title 1', 'Meta Description 1', 'H1-1' for categorization.")
 
     # File uploader
     uploaded_file = st.file_uploader("Upload CSV", type=["csv"])
@@ -79,7 +79,7 @@ def main():
                 st.error("Error reading CSV file. Please ensure it is saved in a compatible encoding (e.g., UTF-8, ISO-8859-1).")
                 return
 
-            required_columns = ["URL", "Title 1", "Meta Description 1", "H1-1"]
+            required_columns = ["Address", "Title 1", "Meta Description 1", "H1-1"]
             if not all(column in df.columns for column in required_columns):
                 st.error("The uploaded file must have the following columns: 'URL', 'Title 1', 'Meta Description 1', 'H1-1'.")
                 return
@@ -88,10 +88,10 @@ def main():
             rules = load_rules()
 
             # Categorize URLs
-            df["Category"] = df.apply(lambda row: categorize_url(row["URL"], row["Title 1"], row["Meta Description 1"], row["H1-1"], us_cities, rules), axis=1)
+            df["Category"] = df.apply(lambda row: categorize_url(row["Address"], row["Title 1"], row["Meta Description 1"], row["H1-1"], us_cities, rules), axis=1)
 
             # Create output DataFrame with only Address and Category columns
-            output_df = df[["URL", "Category"]]
+            output_df = df[["Address", "Category"]]
 
             # Show results and allow download
             st.write("Categorized URLs:", output_df)
