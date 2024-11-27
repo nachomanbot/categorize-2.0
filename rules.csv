@@ -1,15 +1,15 @@
 Keyword,Category,Location,Priority
 /wp-login|/cdn-cgi,Low Value Page,URL,0
-/blog$|/neighborhoods$|/communities$|/agents$|/team$|/listings$|/property$|/properties$|/contact$|/about$|/testimonials$|/privacy$|/tos$|/terms$|/resources$|/sell$|/purchase$|/films$|/career$|/services$|/dmca$|/service$|/finance$|/home-page$|/home$|/home-staging$|/home-valuation$|/home-value$,CMS Pages,URL,0
-accessibility|affordability|dmca|evaluation,CMS Pages,URL,0
+/blog(/)?$|/neighborhoods(/)?$|/communities(/)?$|/agents(/)?$|/team(/)?$|/listings(/)?$|/property(/)?$|/properties(/)?$|/contact(/)?$|/about(/)?$|/testimonials(/)?$|/privacy(/)?$|/tos(/)?$|/terms(/)?$|/resources(/)?$|/sell(/)?$|/purchase(/)?$|/films(/)?$|/career(/)?$|/services(/)?$|/dmca(/)?$|/service(/)?$|/finance(/)?$|/home-page(/)?$|/home(/)?$|/home-staging(/)?$|/home-valuation(/)?$|/home-value$,CMS Pages,URL,0
+accessibility|affordability|dmca|evaluation|locator|brokerage,CMS Pages,URL,0
 /page/\d+|[?&]pg=\d+|idxpage|polygon,Pagination,URL,1
 \?.+=,Parameters,URL,2
 /tag|/category|/blog/month|/blog/category|^/\d{4}/(\d{2}/(\d{2}/)?)?|author,Blog Filters,URL,1
 /blog,Blog Pages,URL,2
 /properties|/property|/homes-for-sale|/rent|/listings|/listing|/rentals|/mls|/idx|/sales|/sold,Property Pages,URL,3
 service|free|valuation|financing|guide,CMS Pages,Title,1
-guide|tips|how-to|top|best|review|overview|tutorial|checklist|explained|faq|update|news|insight|story|ideas|strategies|examples|benefits|steps|ways|reasons|lessons|facts|recap|trends|how|things|divorce|prep|relocate|know,Blog Pages,URL,4
-/agent|/team|/our-team,Agent Pages,URL,1
+guide|tips|how-to|top|best|review|overview|tutorial|checklist|explained|faq|update|news|insight|story|ideas|strategies|examples|benefits|steps|ways|reasons|lessons|facts|recap|trends|how|things|divorce|prep|relocate|know|debut|experience|adventure|retire|mountain|sky|,Blog Pages,URL,4
+/agent|/team|/our-team|/people|/meet-us,Agent Pages,URL,1
 rent|leasing,Property Pages,Meta Description,1
 homepage|index,Homepage,Title,1
 testimonials|customer stories,Testimonials Page,H1,1
