@@ -1,7 +1,7 @@
 Keyword,Category,Location,Priority
-/blog$|/neighborhoods$|/communities$|/agents$|/team$|/listings$|/property$|/properties$,CMS Pages,URL,0
+/blog$|/neighborhoods$|/communities$|/agents$|/team$|/listings$|/property$|/properties$|/contact$|/about$|/testimonials$|/privacy$|/tos$|/terms$|/resources$|/sell$|/purchase$|/films$|/career$|/services$|/dmca$,CMS Pages,URL,0
 \?.+=,Parameters,URL,1
-/page/\d+|/?pg|idxpage|/?polygon,Pagination,URL,1
+/page/\d+|pg=|idxpage|polygon,Pagination,URL,1
 /blog,Blog Pages,URL,1
 /tag|/category|/blog/month|/blog/category|^/\d{4}/(\d{2}/(\d{2}/)?)?,Blog Filters,URL,1
 /properties|/property|/homes-for-sale|/rent|/listings|/rentals|/mls|/idx|/sales|/sold,Property Pages,URL,3
@@ -17,5 +17,4 @@ neighborhood guide|area information|communities,Neighborhood Pages,H1,2
 agent|real estate team,Agent Pages,Title,3
 sell your home|home valuation,CMS Pages,Meta Description,2
 /real-estate,MLS Pages,URL,1
-/contact|/about|/testimonials|/privacy|/tos|/terms|/resources|/sell|/purchase|/films|/career|/services/dmca,CMS Pages,URL,6
 /wp-login,Low Value Page,URL,1
