@@ -2,9 +2,10 @@ Keyword,Category,Location,Priority
 /blog$|/neighborhoods$|/communities$|/agents$|/team$|/listings$|/property$|/properties$|/contact$|/about$|/testimonials$|/privacy$|/tos$|/terms$|/resources$|/sell$|/purchase$|/films$|/career$|/services$|/dmca$,CMS Pages,URL,0
 \?.+=,Parameters,URL,1
 /page/\d+|pg=|idxpage|polygon,Pagination,URL,1
-/blog,Blog Pages,URL,1
 /tag|/category|/blog/month|/blog/category|^/\d{4}/(\d{2}/(\d{2}/)?)?,Blog Filters,URL,1
+/blog,Blog Pages,URL,2
 /properties|/property|/homes-for-sale|/rent|/listings|/rentals|/mls|/idx|/sales|/sold,Property Pages,URL,3
+guide|tips|how-to|top|best|review|overview|tutorial|checklist|explained|faq|update|news|insight|story|ideas|strategies|examples|benefits|steps|ways|reasons|lessons|facts|recap|trends|how|things,Blog Pages,URL,4
 /agent|/team|/our-team,Agent Pages,URL,1
 service,CMS Pages,Title,1
 valuation|free,CMS Pages,Title,1
