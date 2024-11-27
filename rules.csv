@@ -2,7 +2,7 @@ Keyword,Category,Location,Priority
 /wp-login|/cdn-cgi,Low Value Page,URL,0
 /blog$|/neighborhoods$|/communities$|/agents$|/team$|/listings$|/property$|/properties$|/contact$|/about$|/testimonials$|/privacy$|/tos$|/terms$|/resources$|/sell$|/purchase$|/films$|/career$|/services$|/dmca$|/service$|/finance$|/home-page$|/home$|/home-staging$|/home-valuation$|/home-value$,CMS Pages,URL,0
 \?.+=,Parameters,URL,1
-/page/\d+|?pg|idxpage|polygon,Pagination,URL,1
+/page/\d+|\?pg|idxpage|polygon,Pagination,URL,1
 /tag|/category|/blog/month|/blog/category|^/\d{4}/(\d{2}/(\d{2}/)?)?|author,Blog Filters,URL,1
 /blog,Blog Pages,URL,2
 /properties|/property|/homes-for-sale|/rent|/listings|/listing|/rentals|/mls|/idx|/sales|/sold,Property Pages,URL,3
