@@ -49,6 +49,9 @@ def categorize_url(url, title, meta_description, h1, us_cities, rules):
 
     # 2. Neighborhood Pages (Detect City Names)
     if any(city in url for city in us_cities):
+        # Add exclusions to avoid false categorization
+        if re.search(r'/developments|/new-development', url):
+            return "Development Pages"
         # Check for MLS keywords in title or meta description
         if any(keyword in title or keyword in meta_description for keyword in ["sell", "buy", "sale"]):
             return "MLS Pages"
