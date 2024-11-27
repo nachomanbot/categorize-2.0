@@ -30,7 +30,7 @@ def categorize_url(url, title, meta_description, h1, us_cities, rules):
 
     # 1. Homepage Detection (Relative and Absolute URLs)
     if re.fullmatch(r"https?://(www\.)?[^/]+(/)?(index\.html)?", url) or url in ["/", "", "/"]:
-        return "Homepage"
+        return "CMS Pages"
 
     # Apply rules from rules.csv
     for rule in rules:
