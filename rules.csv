@@ -5,6 +5,7 @@ Keyword,Category,Location,Priority
 accessibility|affordability|dmca|evaluation|locator|brokerage,CMS Pages,URL,0
 new-development|new_development,Development Pages,URL,0
 /page/\d+|[?&]pg=\d+|idxpage|polygon,Pagination,URL,1
+/neighborhood|/neighborhoods,Neighborhood Pages,URL,1
 \?.+=,Parameters,URL,2
 /tag|/category|/blog/month|/blog/category|^/\d{4}/(\d{2}/(\d{2}/)?)?|author,Blog Filters,URL,1
 /properties|/property|/homes-for-sale|/rent|/listings|/listing|/rentals|/mls|/idx|/sales|/sold,Property Pages,URL,3
