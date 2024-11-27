@@ -6,16 +6,15 @@ new-development|new_development,Development Pages,URL,0
 /page/\d+|[?&]pg=\d+|idxpage|polygon,Pagination,URL,1
 \?.+=,Parameters,URL,2
 /tag|/category|/blog/month|/blog/category|^/\d{4}/(\d{2}/(\d{2}/)?)?|author,Blog Filters,URL,1
-/blog,Blog Pages,URL,2
 /properties|/property|/homes-for-sale|/rent|/listings|/listing|/rentals|/mls|/idx|/sales|/sold,Property Pages,URL,3
 service|free|valuation|financing|guide,CMS Pages,Title,1
-guide|tips|how-to|top|best|review|overview|tutorial|checklist|explained|faq|update|news|insight|story|ideas|strategies|examples|benefits|steps|ways|reasons|lessons|facts|recap|trends|how|things|divorce|prep|relocate|know|debut|experience|adventure|retire|mountain|sky|,Blog Pages,URL,4
-/agent|/team|/our-team|/people|/meet-us,Agent Pages,URL,1
+/agent|/agents|/team|/our-team|/people|/meet-us,Agent Pages,URL,1
 rent|leasing,Property Pages,Meta Description,1
 homepage|index,Homepage,Title,1
 testimonials|customer stories,Testimonials Page,H1,1
 for sale|luxury homes,Property Pages,Title,2
 neighborhood guide|area information|communities,Neighborhood Pages,H1,2
-/uncategorized,Blog Pages,URL,2
+/blog|/uncategorized,Blog Pages,URL,2
 agent|real estate team,Agent Pages,Title,3
 /real-estate,MLS Pages,URL,1
+guide|tips|how-to|top|best|review|overview|tutorial|checklist|explained|faq|update|news|insight|story|ideas|strategies|examples|benefits|steps|ways|reasons|lessons|facts|recap|trends|how|things|divorce|prep|relocate|know|debut|experience|adventure|retire|mountain|sky|,Blog Pages,URL,4
