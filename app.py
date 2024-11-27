@@ -28,6 +28,10 @@ def categorize_url(url, title, meta_description, h1, us_cities, rules):
     meta_description = meta_description.lower() if pd.notna(meta_description) else ""
     h1 = str(h1).lower() if pd.notna(h1) else ""
 
+    # 1. Homepage Detection (Relative and Absolute URLs)
+    if re.fullmatch(r"https?://(www\.)?[^/]+(/)?(index\.html)?", url) or url in ["/", "", "/"]:
+        return "Homepage"
+
     # Apply rules from rules.csv
     for rule in rules:
         keyword = rule['Keyword'].lower()
@@ -42,10 +46,6 @@ def categorize_url(url, title, meta_description, h1, us_cities, rules):
             return category
         elif location == 'h1' and keyword in h1:
             return category
-
-    # 1. Homepage Detection (Relative and Absolute URLs)
-    if re.fullmatch(r"https?://(www\.)?[^/]+(/)?(index\.html)?", url) or url in ["/", "", "index.html"]:
-        return "CMS Pages"
 
     # 2. Neighborhood Pages (Detect City Names)
     if any(city in url for city in us_cities):
