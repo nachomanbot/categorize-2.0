@@ -1,15 +1,15 @@
 Keyword,Category,Location,Priority
-/wp-login,Low Value Page,URL,0
-/blog$|/neighborhoods$|/communities$|/agents$|/team$|/listings$|/property$|/properties$|/contact$|/about$|/testimonials$|/privacy$|/tos$|/terms$|/resources$|/sell$|/purchase$|/films$|/career$|/services$|/dmca$,CMS Pages,URL,0
+/wp-login|/cdn-cgi,Low Value Page,URL,0
+/blog$|/neighborhoods$|/communities$|/agents$|/team$|/listings$|/property$|/properties$|/contact$|/about$|/testimonials$|/privacy$|/tos$|/terms$|/resources$|/sell$|/purchase$|/films$|/career$|/services$|/dmca$|/service$|/finance$|/home-page$|/home$|/home-staging$|/home-valuation
+$|/home-value$,CMS Pages,URL,0
 \?.+=,Parameters,URL,1
-/page/\d+|pg=|idxpage|polygon,Pagination,URL,1
-/tag|/category|/blog/month|/blog/category|^/\d{4}/(\d{2}/(\d{2}/)?)?,Blog Filters,URL,1
+/page/\d+|?pg|idxpage|polygon,Pagination,URL,1
+/tag|/category|/blog/month|/blog/category|^/\d{4}/(\d{2}/(\d{2}/)?)?|author,Blog Filters,URL,1
 /blog,Blog Pages,URL,2
-/properties|/property|/homes-for-sale|/rent|/listings|/rentals|/mls|/idx|/sales|/sold,Property Pages,URL,3
+/properties|/property|/homes-for-sale|/rent|/listings|/listing|/rentals|/mls|/idx|/sales|/sold,Property Pages,URL,3
 guide|tips|how-to|top|best|review|overview|tutorial|checklist|explained|faq|update|news|insight|story|ideas|strategies|examples|benefits|steps|ways|reasons|lessons|facts|recap|trends|how|things,Blog Pages,URL,4
 /agent|/team|/our-team,Agent Pages,URL,1
-service,CMS Pages,Title,1
-valuation|free,CMS Pages,Title,1
+service|free|valuation|financing|guide,CMS Pages,Title,1
 rent|leasing,Property Pages,Meta Description,1
 homepage|index,Homepage,Title,1
 testimonials|customer stories,Testimonials Page,H1,1
@@ -17,5 +17,4 @@ for sale|luxury homes,Property Pages,Title,2
 neighborhood guide|area information|communities,Neighborhood Pages,H1,2
 /uncategorized,Blog Pages,URL,2
 agent|real estate team,Agent Pages,Title,3
-sell your home|home valuation,CMS Pages,Meta Description,2
 /real-estate,MLS Pages,URL,1
