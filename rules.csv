@@ -1,5 +1,6 @@
 Keyword,Category,Location,Priority
 ^/$,CMS Pages,URL,0
+^(https?:\/\/)?(?!www\.)([a-z0-9-]+\.)+[a-z]+$,Subdomain,URL,0
 /wp-login|/cdn-cgi,Low Value Page,URL,0
 /blog(/)?$|/neighborhoods(/)?$|/communities(/)?$|/agents(/)?$|/team(/)?$|/listings(/)?$|/property(/)?$|/properties(/)?$|/contact(/)?$|/contact-us(/)?$|/about(/)?$|/testimonials(/)?$|/privacy(/)?$|/tos(/)?$|/terms(/)?$|/resources(/)?$|/sell(/)?$|/purchase(/)?$|/films(/)?$|/career(/)?$|/services(/)?$|/dmca(/)?$|/service(/)?$|/finance(/)?$|/home-page(/)?$|/home(/)?$|/home-staging(/)?$|/home-valuation(/)?$|/home-value$|/404,CMS Pages,URL,0
 accessibility|affordability|dmca|evaluation|locator|brokerage|about-us|about-me|privacy,CMS Pages,URL,0
