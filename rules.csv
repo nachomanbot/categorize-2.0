@@ -11,7 +11,7 @@ new-development|new_development,Development Pages,URL,0
 /tag|/category|/blog/month|/blog/category|/categories|^/\d{4}/(\d{2}/(\d{2}/)?)?|author,Blog Filters,URL,1
 /properties|/property|/homes-for-sale|/rent|/listings|/listing|/rentals|/mls|/idx|/sales|/sold,Property Pages,URL,2
 service|free|valuation|financing|guide,CMS Pages,Title,1
-/agent|/agents|/team|/our-team|/people|/meet-us,Agent Pages,URL,2
+/agent|/agents|/team|/our-team|/people|/meet-us|/about,Agent Pages,URL,2
 rent|leasing,Property Pages,Meta Description,1
 homepage|index,Homepage,Title,1
 testimonials|customer stories,Testimonials Page,H1,1
