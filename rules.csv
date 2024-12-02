@@ -4,7 +4,7 @@ Keyword,Category,Location,Priority
 /blog(/)?$|/neighborhoods(/)?$|/communities(/)?$|/agents(/)?$|/team(/)?$|/listings(/)?$|/property(/)?$|/properties(/)?$|/contact(/)?$|/contact-us(/)?$|/about(/)?$|/testimonials(/)?$|/privacy(/)?$|/tos(/)?$|/terms(/)?$|/resources(/)?$|/sell(/)?$|/purchase(/)?$|/films(/)?$|/career(/)?$|/services(/)?$|/dmca(/)?$|/service(/)?$|/finance(/)?$|/home-page(/)?$|/home(/)?$|/home-staging(/)?$|/home-valuation(/)?$|/home-value$|/404,CMS Pages,URL,0
 accessibility|affordability|dmca|evaluation|locator|brokerage|about-us|about-me|privacy,CMS Pages,URL,0
 new-development|new_development,Development Pages,URL,0
-/page/\d+|[?&]pg=\d+|idxpage|polygon|&page,Pagination,URL,1
+/page/\d+|[?&]pg=\d+|idxpage|polygon|&page|?page=,Pagination,URL,1
 /neighborhood|/neighborhoods,Neighborhood Pages,URL,1
 \?.+=,Parameters,URL,2
 /tag|/category|/blog/month|/blog/category|/categories|^/\d{4}/(\d{2}/(\d{2}/)?)?|author,Blog Filters,URL,1
