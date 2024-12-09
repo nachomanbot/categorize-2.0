@@ -70,7 +70,15 @@ def main():
     st.write("by NDA and the SEO Migration team 🥳")
     st.write("Upload a CSV file with the following columns: 'Address', 'Title 1', 'Meta Description 1', 'H1-1' for categorization.")
     st.write("Make sure to use relative URLs except for subdomains.")
-    
+
+    # Password protection
+    password = st.text_input("Enter Password:", type="password")
+    correct_password = "@SEOvaga!!!"  # Replace with your desired password
+
+    if password != correct_password:
+        st.warning("Please enter the correct password to proceed.")
+        return
+
     # File uploader
     uploaded_file = st.file_uploader("Upload CSV", type=["csv"])
     if uploaded_file is not None:
