@@ -8,7 +8,7 @@ new-development|new_development,Development Pages,URL,0
 /page/\d+|[?&]pg=\d+|[?&]page=\d+|idxpage|polygon|&page,Pagination,URL,1
 /neighborhood|/neighborhoods,Neighborhood Pages,URL,1
 \?.+=,Parameters,URL,2
-/tag|/category|/blog/month|/blog/category|/categories|^/\d{4}/(\d{2}/(\d{2}/)?)?|author,Blog Filters,URL,1
+/tag|/category|/blog/month|/blog/category|/categories|^/\d{4}/(\d{2}/(\d{2}/)?)?|author|category_id,Blog Filters,URL,1
 /properties|/property|/homes-for-sale|/rent|/listings|/listing|/rentals|/mls|/idx|/sales|/sold,Property Pages,URL,2
 service|free|valuation|financing|guide,CMS Pages,Title,1
 /agent|/agents|/team|/our-team|/people|/meet-us|/about,Agent Pages,URL,2
