@@ -66,9 +66,10 @@ def categorize_url(url, title, meta_description, h1, us_cities, rules):
 
 # Main function
 def main():
-    st.title("URL Categorizer")
+    st.title("URL Categorizer 3.0")
     st.write("Upload a CSV file with the following columns: 'Address', 'Title 1', 'Meta Description 1', 'H1-1' for categorization.")
-
+    st.write("Make sure to use relative URLs except for subdomains.")
+    
     # File uploader
     uploaded_file = st.file_uploader("Upload CSV", type=["csv"])
     if uploaded_file is not None:
