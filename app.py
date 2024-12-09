@@ -28,6 +28,10 @@ def categorize_url(url, title, meta_description, h1, us_cities, rules):
     meta_description = meta_description.lower() if pd.notna(meta_description) else ""
     h1 = str(h1).lower() if pd.notna(h1) else ""
 
+    # Check for Long URLs
+    if len(url) > 180:
+        return "Long URLs"
+
     # 1. Homepage Detection (Relative and Absolute URLs)
     if re.fullmatch(r"https?://(www\.)?[^/]+(/)?(index\.html)?", url) or url in ["/", "", "/"]:
         return "CMS Pages"
