@@ -30,7 +30,7 @@ def categorize_url(url, title, meta_description, h1, us_cities, rules):
 
     # Check for Long URLs
     if len(url) > 180:
-        return "Long URLs"
+        return "Long URL"
 
     # 1. Homepage Detection (Relative and Absolute URLs)
     if re.fullmatch(r"https?://(www\.)?[^/]+(/)?(index\.html)?", url) or url in ["/", "", "/"]:
