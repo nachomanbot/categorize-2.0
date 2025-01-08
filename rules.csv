@@ -10,7 +10,7 @@ new-development|new_development,Development Pages,URL,0
 /page/\d+|[?&]pg=\d+|[?&]page=\d+|idxpage|polygon|&page|paged,Pagination,URL,1
 /neighborhood|/neighborhoods,Neighborhood Pages,URL,1
 \?.+=,Parameters,URL,2
-/properties|/property|/homes|/homes-for-sale|/rent|/listings|/listing|/rentals|/mls|/idx|/sales|/sold,Property Pages,URL,2
+/properties|/property|/homes|/homes-for-sale|/rent|/listings|/listing|/rentals|/mls|/idx|/sales|/sold|/real-estate,Property Pages,URL,2
 service|free|valuation|financing|guide,CMS Pages,Title,1
 /agent|/agents|/team|/our-team|/people|/meet-us|/about,Agent Pages,URL,2
 rent|leasing,Property Pages,Meta Description,1
@@ -20,5 +20,4 @@ for sale|luxury homes,Property Pages,Title,2
 neighborhood guide|area information|communities,Neighborhood Pages,H1,2
 /blog|/uncategorized|/post|/posts,Blog Pages,URL,3
 agent|real estate team,Agent Pages,Title,3
-/real-estate,MLS Pages,URL,1
 guide|tips|how-to|top|best|review|overview|tutorial|checklist|explained|faq|update|news|insight|story|ideas|strategies|examples|benefits|steps|ways|reasons|lessons|facts|recap|trends|how|things|divorce|prep|relocate|know|debut|experience|adventure|retire|mountain|sky|mortgage,Blog Pages,Title,4
