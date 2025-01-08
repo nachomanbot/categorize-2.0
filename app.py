@@ -66,7 +66,7 @@ def categorize_url(url, title, meta_description, h1, us_cities, rules):
 
 # Main function
 def main():
-    st.title("URL Categorizer 3.0")
+    st.title("URL Categorizer 3.2")
     st.write("by NDA and the SEO Migration team 🥳")
     st.write("Upload a CSV file with the following columns: 'Address', 'Title 1', 'Meta Description 1', 'H1-1' for categorization.")
     st.write("Make sure to use relative URLs except for subdomains.")
