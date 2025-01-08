@@ -4,7 +4,7 @@ Keyword,Category,Location,Priority
 ^/\d{4}/\d{2}/\d{2}/[^/]+/?$,Blog Pages,URL,0
 /wp-login|/cdn-cgi,Low Value Page,URL,0
 /blog(/)?$|/neighborhoods(/)?$|/communities(/)?$|/agents(/)?$|/team(/)?$|/listings(/)?$|/property(/)?$|/properties(/)?$|/contact(/)?$|/contact-us(/)?$|/about(/)?$|/testimonials(/)?$|/privacy(/)?$|/tos(/)?$|/terms(/)?$|/resources(/)?$|/sell(/)?$|/purchase(/)?$|/films(/)?$|/career(/)?$|/services(/)?$|/dmca(/)?$|/service(/)?$|/finance(/)?$|/home-page(/)?$|/home(/)?$|/home-staging(/)?$|/home-valuation(/)?$|/home-value$|/404,CMS Pages,URL,0
-accessibility|affordability|dmca|evaluation|locator|brokerage|about-us|about-me|privacy|videos,CMS Pages,URL,0
+accessibility|affordability|dmca|evaluation|locator|brokerage|about-us|about-me|privacy|videos|/buyers|/sellers|/sell|/buy|/financing|/sold|testimonials,CMS Pages,URL,0
 new-development|new_development,Development Pages,URL,0
 /tag|/category|/blog/month|/blog/category|/categories|^/\d{4}/(\d{2}/(\d{2}/)?)?$|author|category_id,Blog Filters,URL,1
 /page/\d+|[?&]pg=\d+|[?&]page=\d+|idxpage|polygon|&page|paged,Pagination,URL,1
@@ -15,7 +15,7 @@ service|free|valuation|financing|guide,CMS Pages,Title,1
 /agent|/agents|/team|/our-team|/people|/meet-us|/about,Agent Pages,URL,2
 rent|leasing,Property Pages,Meta Description,1
 homepage|index,Homepage,Title,1
-testimonials|customer stories,Testimonials Page,H1,1
+testimonials|customer stories,CMS Pages,H1,1
 for sale|luxury homes,Property Pages,Title,2
 neighborhood guide|area information|communities,Neighborhood Pages,H1,2
 /blog|/uncategorized|/post|/posts,Blog Pages,URL,3
